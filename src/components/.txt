@@ -1,0 +1,12 @@
+{  
+                    data != null && data.map(account => (
+                        <div key={account.id} className='row d-flex justify-content-around align-items-center background-secondary p-4 mb-5 rounded-div'>
+                            <p className='col-12 col-md-4 text-center m-md-0 '>CPF: {account.cpf}</p>
+                            <p className='col-12 col-md-4 text-center m-md-0 '>Balance: {account.balance}</p>
+                            <p className='col-12 col-md-4 text-center m-md-0 '>Address: {account.adress}</p>
+                        </div>
+                    ))
+                }
+
+
+

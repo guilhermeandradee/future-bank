@@ -1,0 +1,36 @@
+.px-6 {
+    padding-left: 6rem;
+    padding-right: 6rem;
+}
+
+
+
+.border-secondary {
+    border-color: #313442 !important ;
+}
+
+main {
+    color: #fff;
+}
+
+.container-main {
+    position: relative ;
+}
+
+
+.rounded-div {
+    border-radius: 15px;
+}
+
+.div-hover:hover {
+    background-color: #1a84e156 !important;
+
+    
+}
+.div-account {
+    transition: .3s;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
