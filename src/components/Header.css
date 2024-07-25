@@ -1,4 +1,11 @@
 .a-header {
     text-decoration: none;
     color: #fff;
+
+    cursor: pointer;
+    transition: .3s;
+}
+
+.a-header:hover {
+    color: #1A85E1;
 }

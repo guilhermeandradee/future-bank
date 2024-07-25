@@ -9,3 +9,11 @@
 .background-secondary {
     background-color: #313442;
 }
+
+.account-action {
+    cursor: pointer;
+    transition: .3s;
+}
+.account-action:hover {
+    background-color: #1a84e156 !important;
+}

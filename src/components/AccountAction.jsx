@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Header from "./Header"
 import "./AccountAction.css"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { PiHandDeposit } from "react-icons/pi";
 import { PiHandWithdraw } from "react-icons/pi";
@@ -15,6 +15,7 @@ export const baseURL = "http://localhost:8080"
 const AccountAction = () => {
 
     const  {cpf}  = useParams()
+    const navigate = useNavigate()
     
     const requestData = {
         "cpf": cpf
@@ -37,6 +38,10 @@ const AccountAction = () => {
         
             getAccountByCpf(requestData);
         }, []);
+
+        const goToLink = (url) => {
+            navigate(url)
+        }
 
 
     return(
@@ -61,20 +66,24 @@ const AccountAction = () => {
                 </div>
 
                 <div className="row w-100 my-5 d-flex justify-content-around">
-                    <div className="col-8 col-md-2 mt-4 ">
-                        <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4">
+                    <div onClick={() => goToLink("/deposit")
+
+                    } className="col-8 col-md-2 mt-4 ">
+                        <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4 account-action">
                             <p className="text-center">Depositar</p>
                             <PiHandDeposit/>
                         </div>
                     </div>
-                    <div className="col-8 col-md-2 mt-4 ">
-                        <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4">
+                    <div onClick={() => goToLink("/withdraw")}
+                     className="col-8 col-md-2 mt-4 ">
+                        <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4 account-action">
                             <p className="text-center">Sacar</p>
                             <PiHandWithdraw/>
                         </div>
                     </div>
-                    <div className="col-8 col-md-2 mt-4 ">
-                        <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4">
+                    <div className="col-8 col-md-2 mt-4  ">
+                        <div onClick={() => goToLink("/transfer")}
+                         className="background-secondary d-flex justify-content-center align-items-center flex-column p-4 account-action">
                             <p className="text-center">Transferir</p>
                             <BiTransferAlt/>
                         </div>

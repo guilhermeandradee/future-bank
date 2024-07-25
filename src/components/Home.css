@@ -23,9 +23,7 @@ main {
 }
 
 .div-hover:hover {
-    background-color: #1a84e156 !important;
-
-    
+    background-color: #1a84e156 !important;  
 }
 .div-account {
     transition: .3s;
