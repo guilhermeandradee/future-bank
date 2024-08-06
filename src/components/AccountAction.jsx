@@ -14,7 +14,7 @@ export const baseURL = "http://localhost:8080"
 
 const AccountAction = () => {
 
-    const  {cpf}  = useParams()
+    const  { cpf }  = useParams()
     const navigate = useNavigate()
     
     const requestData = {

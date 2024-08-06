@@ -189,8 +189,8 @@ const Form = ({ typeOfInput }) => {
                     <div className="d-flex justify-content-center mb-3 w-100">
                         <input
                             onChange={handleChange}
-                            placeholder="Address"
-                            type="text"
+                            placeholder="Email"
+                            type="email"
                             className="inputs-form form-control background-secondary border-0 px-4 py-3"
                             id="address"
                             name="adress"
