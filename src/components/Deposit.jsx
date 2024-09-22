@@ -1,11 +1,15 @@
 import Form from "./Form"
 import Header from "./Header"
 
+import { AuthProvider } from "../services/AuthContext"
+
 const Deposit = () => {
     return(
         <>
             <Header/>
-            <Form typeOfInput={"deposit"} />
+            <AuthProvider>
+                <Form typeOfInput={"deposit"} />
+            </AuthProvider>
         </>
     )
 }

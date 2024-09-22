@@ -1,21 +1,28 @@
 import axios from "axios"
 import "./Form.css"
-import { useState } from "react"
-import { useNavigate } from 'react-router-dom';
+import { useState, useContext } from "react"
+import { useNavigate, useParams } from 'react-router-dom';
 import { baseURL } from "./CreateAccount"
 
+import { AuthContext } from "../services/AuthContext";
+
 const Form = ({ typeOfInput }) => {
+
+    const  { cpf }  = useParams()
+
+    const { token, login, logout } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const [errorExists, setErrorExists] = useState(null)
 
 
     const [formData, setFormData] = useState({
-        "cpf": '',
+        "cpf": cpf,
         "password": '',
         "adress": '',
         "value": '',
-        "cpfToReceive": ''
+        "cpfToReceive": '',
+        "token": token
     });
     const [dataMessage, setDataMessage] = useState('')
 
@@ -56,16 +63,27 @@ const Form = ({ typeOfInput }) => {
         e.preventDefault();
 
         typeOfInput === "create" && createAccount();
+        typeOfInput === "login" && loginAccount();
         typeOfInput === "deposit" && depositAmount();
         typeOfInput === "withdraw" && withdrawAmount();
         typeOfInput === "transfer" && transferAmount();
     }
 
     console.log(dataMessage)
+
+    const tokenIsPresent = () => {
+        if(token){
+            return console.log('tokenexists')
+        } else {
+            return console.log('notokne')
+        }
+    }
     
     const createAccount = async () => {
             try {
                 const response = await axios.post(baseURL + "/account/save", formData)
+
+                login(response.data.token)
 
                 setErrorExists(false)
 
@@ -81,7 +99,24 @@ const Form = ({ typeOfInput }) => {
 
     }
 
-    const depositAmount = async () => {
+    const loginAccount = async () => {
+        try {
+            const response = await axios.post(baseURL + "/account/login", formData)
+
+            login(response.data.token)
+
+            setErrorExists(false)
+
+            goHome()
+        } catch (error) {
+            console.log(error.response);
+
+            setErrorExists(true)
+            setDataMessage(error.response.data.message)
+        }
+    }
+
+    const depositAmount = async () => {  
         try {
             const response = await axios.put(baseURL + "/account/make-deposit", formData)
             console.log(response.data)
@@ -158,7 +193,10 @@ const Form = ({ typeOfInput }) => {
             {showError()}
 
             <form className="col col-sm-8 col-md-7 col-lg-5 col-xl-4 d-flex flex-column align-items-center" >
-                <div className="d-flex justify-content-center mb-3 w-100">
+
+                {tokenIsPresent()}
+
+                {returnElementByInputType("create", <div className="d-flex justify-content-center mb-3 w-100">
                     <input
                         onChange={handleChange}
                         type="number"
@@ -171,7 +209,37 @@ const Form = ({ typeOfInput }) => {
                         title="Apenas números são permitidos"
                         required
                     />
-                </div>
+                </div>)}
+
+                {returnElementByInputType("login", <div className="d-flex justify-content-center mb-3 w-100">
+                    <input
+                        onChange={handleChange}
+                        type="number"
+                        className="inputs-form form-control background-secondary border-0 px-4 py-3"
+                        id="cpf"
+                        name="cpf"
+                        maxLength={11}
+                        placeholder="CPF"
+                        pattern="[0-9]*"
+                        title="Apenas números são permitidos"
+                        required
+                    />
+                </div>)}
+
+                {/* <div className="d-flex justify-content-center mb-3 w-100">
+                    <input
+                        onChange={handleChange}
+                        type="number"
+                        className="inputs-form form-control background-secondary border-0 px-4 py-3"
+                        id="cpf"
+                        name="cpf"
+                        maxLength={11}
+                        placeholder="CPF"
+                        pattern="[0-9]*"
+                        title="Apenas números são permitidos"
+                        required
+                    />
+                </div> */}
                 <div className="d-flex justify-content-center mb-3 w-100">
                     <input
                     onChange={handleChange}
@@ -196,7 +264,23 @@ const Form = ({ typeOfInput }) => {
                             name="adress"
                             required
                         />
-                    </div>)}
+                    </div>
+                )}
+
+                {returnElementByInputType("login", 
+                
+                    <div className="d-flex justify-content-center mb-3 w-100">
+                        <input
+                        onChange={handleChange}
+                        placeholder="Email"
+                        type="email"
+                        className="inputs-form form-control background-secondary border-0 px-4 py-3"
+                        id="address"
+                        name="adress"
+                        required
+                        />
+                    </div>
+            )}
 
                 {returnElementByInputType("create", 
                 <a href="/login" className="my-4 text-primary text-decoration-none">I have account</a>)}

@@ -1,11 +1,15 @@
 import Form from "./Form"
 import Header from "./Header"
 
+import { AuthProvider } from "../services/AuthContext"
+
 const WithDraw = () => {
     return(
         <>
             <Header/>
-            <Form typeOfInput={"withdraw"} />
+            <AuthProvider>
+                <Form typeOfInput={"withdraw"} />
+            </AuthProvider>
         </>
     )
 }

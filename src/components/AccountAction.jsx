@@ -3,22 +3,28 @@ import Header from "./Header"
 import "./AccountAction.css"
 import { useNavigate, useParams } from "react-router-dom"
 
+import { useContext } from "react"
+import { AuthContext } from "../services/AuthContext";
+
 import { PiHandDeposit } from "react-icons/pi";
 import { PiHandWithdraw } from "react-icons/pi";
 import { BiTransferAlt } from "react-icons/bi";
 
 
 import axios from "axios"
+import { baseURL } from "./CreateAccount";
 
-export const baseURL = "http://localhost:8080"
 
 const AccountAction = () => {
+
+    const { token, login, logout } = useContext(AuthContext);
 
     const  { cpf }  = useParams()
     const navigate = useNavigate()
     
     const requestData = {
-        "cpf": cpf
+        "cpf": cpf,
+        "token": token
     }
     const [data, setData] = useState({})
     
@@ -66,7 +72,7 @@ const AccountAction = () => {
                 </div>
 
                 <div className="row w-100 my-5 d-flex justify-content-around">
-                    <div onClick={() => goToLink("/deposit")
+                    <div onClick={() => goToLink(`/deposit/${cpf}`)
 
                     } className="col-8 col-md-2 mt-4 ">
                         <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4 account-action">
@@ -74,7 +80,7 @@ const AccountAction = () => {
                             <PiHandDeposit/>
                         </div>
                     </div>
-                    <div onClick={() => goToLink("/withdraw")}
+                    <div onClick={() => goToLink(`/withdraw/${cpf}`)}
                      className="col-8 col-md-2 mt-4 ">
                         <div className="background-secondary d-flex justify-content-center align-items-center flex-column p-4 account-action">
                             <p className="text-center">Sacar</p>
@@ -82,7 +88,7 @@ const AccountAction = () => {
                         </div>
                     </div>
                     <div className="col-8 col-md-2 mt-4  ">
-                        <div onClick={() => goToLink("/transfer")}
+                        <div onClick={() => goToLink(`/transfer/${cpf}`)}
                          className="background-secondary d-flex justify-content-center align-items-center flex-column p-4 account-action">
                             <p className="text-center">Transferir</p>
                             <BiTransferAlt/>

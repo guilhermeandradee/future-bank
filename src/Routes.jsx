@@ -7,6 +7,8 @@ import Deposit from "./components/Deposit"
 import WithDraw from "./components/Withdraw"
 import TransferAmount from "./components/TransferAmount"
 
+import { AuthProvider } from "./services/AuthContext"
+
 
 const MainRoutes = () => {
     return(
@@ -14,10 +16,14 @@ const MainRoutes = () => {
             <Route path="/" element={<CreateAccount/>} /> 
             <Route path="/login" element={<Login/>} />
             <Route path="/home" element={<Home/>} />
-            <Route path="/account/:cpf" element={<AccountAction />} />
-            <Route path="/deposit" element={<Deposit />} />
-            <Route path="/withdraw" element={<WithDraw />} />
-            <Route path="/transfer" element={<TransferAmount/>} />
+            <Route path="/account/:cpf" element={
+                <AuthProvider>
+                    <AccountAction />
+                </AuthProvider>
+                } />
+            <Route path="/deposit/:cpf" element={<Deposit />} />
+            <Route path="/withdraw/:cpf" element={<WithDraw />} />
+            <Route path="/transfer/:cpf" element={<TransferAmount/>} />
         </Routes>
     )
 }
