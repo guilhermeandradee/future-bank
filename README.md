@@ -82,4 +82,4 @@ A aplicação rodará na rota: `http://localhost:5173`
 
 ## Agradecimento
 
- Aproveite todas as funcionalidades e retorne um feedback para fazer um dev júnior feliz! 🌟
+ Aproveite todas as funcionalidades e retorne um feedback para fazer um dev feliz! 🌟
