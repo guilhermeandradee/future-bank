@@ -70,6 +70,7 @@ const Form = ({ typeOfInput }) => {
     }
 
     console.log(dataMessage)
+    console.log(formData)
 
     const tokenIsPresent = () => {
         if(token){
