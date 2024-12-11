@@ -82,7 +82,7 @@ const Form = ({ typeOfInput }) => {
     
     const createAccount = async () => {
             try {
-                const response = await axios.post(baseURL + "/account/save", formData)
+                const response = await axios.post(baseURL + "/account/save", formData, { withCredentials: true })
 
                 login(response.data.token)
 
@@ -102,7 +102,7 @@ const Form = ({ typeOfInput }) => {
 
     const loginAccount = async () => {
         try {
-            const response = await axios.post(baseURL + "/account/login", formData)
+            const response = await axios.post(baseURL + "/account/login", formData, { withCredentials: true })
 
             login(response.data.token)
 
