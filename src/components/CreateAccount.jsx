@@ -8,7 +8,7 @@ import { useEffect } from "react"
 import { AuthProvider } from "../services/AuthContext"
 
 // export const baseURL = "https://future-bank-api.onrender.com"
-export const baseURL = "http://localhost:8080"
+export const baseURL = "147.93.8.169:8080"
 
 const CreateAccount = () => {
 
